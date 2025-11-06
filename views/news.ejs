@@ -1,0 +1,36 @@
+<%- include("partials/header", { title: "News Feed", session }) %>
+
+<link rel="stylesheet" href="/styles.css">
+
+<main class="news-main">
+  <div class="news-header">
+    <h1>🗞️ Latest News</h1>
+    <span class="refresh-note">Auto-refreshes every 5 minutes</span>
+  </div>
+
+  <% if (articles.length === 0) { %>
+    <p class="no-news">No news available at the moment.</p>
+  <% } else { %>
+    <div class="news-grid">
+      <% articles.forEach(article => { %>
+        <div class="news-card">
+          <div class="news-img-container">
+            <img src="<%= article.urlToImage %>" alt="News image" class="news-img" />
+          </div>
+          <div class="news-content">
+            <h2 class="news-title"><%= article.title %></h2>
+            <p class="news-desc"><%= article.description %></p>
+            <a href="<%= article.url %>" target="_blank" class="read-more-btn">Read More →</a>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+</main>
+
+<%- include("partials/footer") %>
+
+<script>
+  // Auto-refresh every 5 minutes (300000 ms)
+  setTimeout(() => window.location.reload(), 300000);
+</script>

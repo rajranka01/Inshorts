@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title || "Inshorts" %></title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="main-header">
+    <div class="container">
+
+      <!-- Logo -->
+      <div class="logo">
+        <a href="/">Inshorts</a>
+      </div>
+
+      <!-- Navbar -->
+      <nav class="navbar">
+        <ul>
+          <% if (session && session.user) { %>
+            
+            <% if (title === "News Feed") { %>
+              <!-- ✅ On News Page: Show ONLY Logout -->
+              <li><a class="nav-btn logout-btn" href="/logout">Logout</a></li>
+
+            <% } else if (title === "Login" || title === "Sign Up") { %>
+              <!-- 🚫 On Login / Signup pages: Hide everything -->
+              
+            <% } else { %>
+              <!-- ✅ Logged in elsewhere -->
+              <li><a class="nav-btn" href="/news">News</a></li>
+              <li><a class="nav-btn" href="/profile">Profile</a></li>
+              <li><a class="nav-btn logout-btn" href="/logout">Logout</a></li>
+            <% } %>
+
+          <% } else { %>
+            <!-- ❌ Not logged in -->
+            <li><a class="nav-btn login-btn" href="/login">Login</a></li>
+            <li><a class="nav-btn signup-btn" href="/signup">Signup</a></li>
+          <% } %>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
